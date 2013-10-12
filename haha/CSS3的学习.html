@@ -1,0 +1,202 @@
+
+CSS3
+sssssssssssss
+
+
+transform:
+1.旋转 -webkit-transform:rotate(45deg);
+2.缩放 -webkit-transform:scale(2);
+3.倾斜 -webkit-transform:skew(5deg,5deg);
+
+
+原点
+-webkit-transform-origin:center,center;
+
+
+渐变
+gradient
+background:-webkit-linear-gradient(top,rgba(0,0,0,0.2) 0,rgba(0,0,0,1) 100%);
+径向渐变
+background:-webkit-radial-gradient(center center, 600px 600px ,rgba(50,50,50,1), rgba(0,0,0,0));
+
+
+
+
+
+过渡效果
+-webkit-transition:5s all ease;
+
+图片倒影
+上下 左右
+above  below left right 
+img {-webkit-box-reflect:below 1px -webkit-linear-gradient(top,rgba(255,255,255,0.2) 0,rgba(255,255,255,1) 100%);}
+
+
+3D模型
+景深
+body { -webkit-perspective:800px;}设置所有的子元素有一个共同的透视值
+body {-webkit-transform:perspective(1000px) rotateX(-10deg) rotateY(0deg); -webkit-transform-style:preserve-3d;}直接作用于元素本身
+
+
+
+
+
+
+位移
+body { padding:100px; -webkit-perspective:200px; -webkit-transform-style:perserve-3d; }
+img { -webkit-transform:translateZ(0); -webkit-transition:5s ease all}
+img:hover {-webkit-transform:translateZ(200px);}
+
+英文字母大写
+text-transform: uppercase
+
+字体
+@font-face {
+	font-family: 'YourWebFontName';
+	src: url('YourWebFontName.eot'); /* IE9 Compat Modes */
+	src: url('YourWebFontName.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             url('YourWebFontName.woff') format('woff'), /* Modern Browsers */
+             url('YourWebFontName.ttf')  format('truetype'), /* Safari, Android, iOS */
+             url('YourWebFontName.svg#YourWebFontName') format('svg'); /* Legacy iOS */
+   }
+
+
+媒体查询
+@media screen and (max-width:960px){
+	body {
+		background:red;
+	}
+}
+
+
+<!--本行代码解决实际显示的分辨率不是手机的分辨率的bug, initial-scale=1.0 初始的缩放比例 maximum-scale=1.0 最大的缩放比例 user-scalable=no 是否支持缩放-->
+<meta name="viewport" content="target-densitydpi=device-dpi, width=device-width,height=device-height,user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+
+
+目标元素宽度/上下文元素宽度=百分比宽度
+
+
+CSS多栏布局
+webkit-column-width:12em;
+webkit-column-count:4;
+-webkit-column-rule:thin dotted #999; 
+-webkit-column-gap:2em;
+
+
+<nav>
+	<ul>
+		<li></li>
+	</ul>
+</nav>
+
+nav { display:table}
+nav ul { display:table-row}
+nav ul li { display: table-cell}
+
+
+表单
+
+require
+autofocus
+
+禁用表单自动完成功能
+autocomplete="off"
+<input id="tel" name="tel" type="tel" placeholder="123456" autocomplete="off" require>
+
+
+list（及对应的datalist元素）
+<input id="search" name="search" type="text" list="awards">
+<datalist id="awards">
+	<select>
+		<option value="asdad"></option>
+		<option value="pppp"></option>
+		<option value="qqq"></option>
+		<option value="zzzz"></option>
+	</select>
+</datalist>
+
+number
+
+<input id="year" name="year" type="number" min="1929" max="2015" require>
+
+email
+<input id="email" name="email" type="email" placeholder="请输入邮件地址" require>
+
+url
+<input id="web" name="web" type="url" placeholder="请输入网址" require>
+
+tel
+<input id="tel" name="tel" type="tel" placeholder="请输入电话" require>
+
+search
+<input id="search" name="search" type="search" placeholder="请输入关键字" require>
+
+
+pattern
+ <form name="test" action="." method="post">
+        <input type="url" required pattern="^\d{4}$" oninput="out(this)" placeholder="请输入代码" >
+        <button type="submit">Check</button>
+    </form>
+<script type="text/javascript">
+function out(i){
+    var v = i.validity;、
+    var s=""
+    if(true === v.valueMessing){
+        i.setCustomValidity("请填写些字段");
+    }else{
+        if(true === v.patternMismatch){
+            i.setCustomValidity("请输入4位数字的代码");
+        }else{
+            i.setCustomValidity("");
+        }
+    }
+}
+</script>
+
+
+color
+<input id="color" name="color" type="color">
+
+
+date
+<input id="date" name="date" type="date">
+
+month
+<input id="month" name="month" type="month">
+
+week
+<input id="week" name="week" type="week">
+
+time
+<input id="time" name="time" type="time">
+
+datetime
+<input id="datetime" name="datetime" type="datetime">
+
+
+range 滑动条
+<input id="howyourate" name="howyourate" type="range" min="1" max="10" value="5" onchang>
+
+input:not([type="range"]){
+	
+}
+
+
+动画
+.aa{
+    -webkit-animation:perspective_value 4s infinite linear;
+}
+
+@-webkit-keyframes perspective_value{
+    0% {-webkit-transform:perspective(500px) rotate(0deg)}
+    100% {-webkit-transform:perspective(500px) rotate(360deg)}
+}
+
+
+$(function(){
+  var chatbox = $(".chatbox").offset().top;
+  $(window).scroll(function (){ 
+          var offsetTop = chatbox + $(window).scrollTop() +"px";
+          $(".chatbox").animate({top : offsetTop },{ duration:800 , queue:false });
+  });
+})
