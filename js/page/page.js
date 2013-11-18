@@ -1,7 +1,7 @@
 /**
  * 分页组件
  * User: xiejinlong@yy.com
- * Time: (2013-10-28 15:19)
+ * Time: (2013-10-28 15:10)
  */
 (function() {
     "use strict";
