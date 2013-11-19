@@ -1,7 +1,7 @@
 /**
  * 分页组件
  * User: xiejinlong@yy.com
- * Time: (2013-10-28 15:10)
+ * Time: (2013-10-28 15:19)
  */
 (function() {
     "use strict";
@@ -15,7 +15,9 @@
      *       "total":60,
      *       "per_page":5,
      *       "nowpage":2,
-     *       "callback":aa
+     *       "callback":function(now){
+     *               console.log('当前页:' + now);
+     *           }
      *   });
      */
     function page(){
@@ -37,6 +39,11 @@
             this.createHtml();
             this.bindEvent();
         },
+        /**
+         * 创建html
+         * @method createHtml
+         * @return {boolean}
+         */
         createHtml:function(){
              this.htmlStr.length=0;
              if(this.totle<1 || this.nowpage> this.totle ){ return false;}
@@ -115,6 +122,13 @@
             }
 
         },
+        /**
+         * 包含函数
+         * @method contains
+         * @param element 目标
+         * @param oParent 父亲元素
+         * @return {boolean}
+         */
         contains:function(element,oParent){
             if(oParent.contains) {
                 return oParent.contains(element)
@@ -123,6 +137,13 @@
                 return !!(oParent.compareDocumentPosition(element) & 16)
             }
         },
+        /**
+         * 判断子元素是否在包含的元素
+         * @method isParent
+         * @param element
+         * @param tagName
+         * @return {boolean}
+         */
         isParent:function(element, tagName) {
             while(element != undefined && element != null && element.tagName.toUpperCase() !== "BODY") {
                 if(element.tagName.toUpperCase() == tagName.toUpperCase())
