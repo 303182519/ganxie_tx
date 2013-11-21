@@ -10,7 +10,18 @@
      * @class squareDraw
      * @constructor
      * @example
-
+     * var lottery=new squareDraw({
+     *     "id_dom":"lottery_gift",
+     *     "prize_arr":['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t'],
+     *     "round_count":2,
+     *     "normal_speed":400,
+     *     "up_speed":100,
+     *     "start_point":6,
+     *     "end_point":38,
+     *     "show_result":function(prize_name){
+     *          console.log("恭喜你中了"+prize_name);
+     *   }
+     * })
      */
     function squareDraw(){
         this.initialize.apply(this, arguments)
