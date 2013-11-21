@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>抽奖组件（正方形）</title>
+    <meta charset="utf-8"/>
+    <link href="css/base.css" rel="stylesheet" type="text/css" />
+    <link href="css/square_draw.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://sz.duowan.com/s/jquery/jquery.js"></script>
+</head>
+<body>
+    <div class="wrap">
+          <div class="lottery_area" id="lottery_gift">
+              <div class="beginGame"></div>
+              <ul class="square_draw clearfix">
+                  <li class="gift_1"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_2"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_3"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_4"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_5"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_6"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_7"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_8"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_9"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_10"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_11"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_12"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_13"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_14"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_15"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_16"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_17"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_18"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_19"><img src="img/prize.jpg" width="105" height="105"/></li>
+                  <li class="gift_20"><img src="img/prize.jpg" width="105" height="105"/></li>
+              </ul>
+              <div class="suiji_1 suiji"></div>
+          </div>
+    </div>
+</body>
+<script type="text/javascript" src="squareDraw.js"></script>
+<script type="text/javascript">
+    var index={
+      init:function(){
+        //首先new一个抽奖类
+         var lottery=new squareDraw({
+             "id_dom":"lottery_gift",
+             "prize_arr":['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t'],
+             "round_count":2,
+             "normal_speed":400,
+             "up_speed":100,
+             "start_point":6,
+             "end_point":38,
+             "show_result":function(prize_name){
+                  console.log("恭喜你中了"+prize_name);
+             }
+         })
+         var _this=this;
+         $(".beginGame").on("click",function(){
+               //模拟后台返回的随机礼品
+               var prize=_this.lottery_fn();
+               //调用抽奖类的-转动方法
+               lottery.set_prize(prize);
+
+           })
+      },
+      /**
+       * 模拟后台返回的随机礼品
+       */
+      lottery_fn:function(){
+           var prize=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t'];
+           var suiji=Math.ceil(Math.random()*20);
+          console.log(prize[suiji]);
+           return  prize[suiji];
+      }
+
+    }
+    index.init();
+</script>
+</html>

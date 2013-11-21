@@ -1,0 +1,29 @@
+@charset "utf-8";
+.lottery_area {  height: 551px;width: 760px;position: relative;}
+.square_draw { height: 551px;width: 760px; background: url(../img/lottery_bg.png) no-repeat;}
+.square_draw li,.suiji { position: absolute; display: block; cursor: pointer; height: 105px; width: 105px; background: #000;}
+.suiji { background: url(../img/suiji.png) no-repeat; display: none;}
+#lottery_gift li.gift_1,.suiji_1 { top:6px; left: 6px;}
+#lottery_gift li.gift_2,.suiji_2 { top:6px; left: 113px;}
+#lottery_gift li.gift_3,.suiji_3 { top:6px; left: 220px;}
+#lottery_gift li.gift_4,.suiji_4 { top:6px; left: 327px;}
+#lottery_gift li.gift_5,.suiji_5 { top:6px; left: 434px;}
+#lottery_gift li.gift_6,.suiji_6 { top:6px; left: 541px;}
+#lottery_gift li.gift_7,.suiji_7 { top:6px; left: 648px;}
+#lottery_gift li.gift_8,.suiji_8 { top:113px; left: 648px;}
+#lottery_gift li.gift_9,.suiji_9 { top:220px; left: 648px;}
+#lottery_gift li.gift_10,.suiji_10 { top:327px; left: 648px;}
+#lottery_gift li.gift_11,.suiji_11 { top:434px; left: 648px;}
+#lottery_gift li.gift_12,.suiji_12 { top:434px; left: 541px;}
+#lottery_gift li.gift_13,.suiji_13 { top:434px; left: 434px;}
+#lottery_gift li.gift_14,.suiji_14 { top:434px; left: 327px;}
+#lottery_gift li.gift_15,.suiji_15 { top:434px; left: 220px;}
+#lottery_gift li.gift_16,.suiji_16 { top:434px; left: 113px;}
+#lottery_gift li.gift_17,.suiji_17 { top:434px; left: 6px;}
+#lottery_gift li.gift_18,.suiji_18 { top:327px; left: 6px;}
+#lottery_gift li.gift_19,.suiji_19 { top:220px; left: 6px;}
+#lottery_gift li.gift_20,.suiji_20 { top:113px; left: 6px;}
+
+
+
+.beginGame{ height: 69px;width: 236px;position: absolute;left: 50%; top: 242px; margin-left: -118px;cursor: pointer;}
