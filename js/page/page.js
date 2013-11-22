@@ -26,7 +26,7 @@
 
     page.prototype={
         /**
-         * 焦点图组件初始化函数
+         * 分页组件初始化函数
          * @method initialize
          * @param {Object} 参数
          */
