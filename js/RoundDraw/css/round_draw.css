@@ -1,0 +1,10 @@
+@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+/* lottery */
+#lottery{background:url(../img/disc_bg.png) no-repeat;position:relative;height:426px;width:426px;margin:40px auto;}
+#lottery #rotate_bg{ position:absolute;left:28px;top:28px;width:370px;height:370px;}
+#lottery .lottery_star { width: 118px; height: 147px; background: url(../img/lottery_star.png) no-repeat; position: absolute; left: 155px; top:125px;}
+#lotteryBtn { cursor:pointer; width: 73px; height: 61px; background: url(../img/rotate_static.jpg) no-repeat; font-size: 0; line-height: 0; overflow: hidden; position: absolute; left: 22px; top:55px;}
+#lottery_num { position: absolute; left: 30px; top:98px; color: #fff; font-size: 14px}

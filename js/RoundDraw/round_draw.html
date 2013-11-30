@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>抽奖组件（圆形）</title>
+    <meta charset="utf-8"/>
+    <link href="css/round_draw.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="http://sz.duowan.com/s/jquery/jquery.js"></script>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="http://sz.duowan.com/DD_belatedPNG.js"></script>
+    <script type="text/javascript">DD_belatedPNG.fix('.pngfix')</script>
+    <![endif]-->
+</head>
+<body>
+    <div id="lottery" class="pngfix">
+        <img src="img/disc_rotate.png" id="rotate_bg" class="pngfix"/>
+        <div class="lottery_star pngfix">
+            <div id="lotteryBtn">抽奖</div>
+            <span id="lottery_num">还剩<span>12</span>次</span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="RoundDraw.js"></script>
+<script type="text/javascript">
+$(function(){
+    var lottery=new RoundDraw({
+        "selector":"#rotate_bg",
+        "duration":3000,
+        "round_count":4,
+        "prize_arr":['表情碎片X2','YY月费会员','表情成长值+30','抽奖机会+1','表情碎片X4','YY月票X10','表情成长值+100','YY年会会员','谢谢参与','表情成长值+50','表情碎片X2','iPad mini'],
+        "callback":function(prize){
+
+            var num=parseInt($("#lottery_num span").text())-1;
+            $("#lottery_num span").html(num);
+            document.title='中奖了！'+prize;
+        }
+    });
+
+
+    $("#lotteryBtn").click(function() {
+        lottery.set_prize("抽奖机会+1");
+    }) 
+
+})
+   
+</script>
+
+</html>

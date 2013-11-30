@@ -12,6 +12,7 @@
 - up_speed：中途加速
 - start_point：加速点
 - end_point：减速点 【最好要小于-（奖品个数*圈数的大小）】
+- show_result：回调函数
 
 
 ----------
