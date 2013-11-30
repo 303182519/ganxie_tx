@@ -1,7 +1,6 @@
 /**
  * 抽奖组件（正方形）
  * User: xiejinlong@yy.com
- * Time: (2013-11-21 10:19)
  */
 (function() {
     "use strict";
@@ -31,7 +30,7 @@
         /**
          * 抽奖组件初始化函数
          * @method initialize
-         * @param {Object} 参数
+         * @param {Object} obj 参数
          */
         initialize:function(obj){
             //整个转盘的ID节点
@@ -61,6 +60,7 @@
         },
         /**
          * 设置奖品
+         * @param {String} prize 奖品名称
          * @method set_prize
          */
         set_prize:function(prize){
@@ -74,6 +74,9 @@
         },
         /**
          * 寻找获得奖品在数组中的索引
+         * @param {String} prize 奖品名称
+         * @return {Number} 得到奖品的索引
+         * @method find_prize_index
          */
         find_prize_index:function(prize){
             for(var i=0; i<this.award_count;i++) if(this.prize_arr[i]==prize) return i;
@@ -81,6 +84,7 @@
         },
         /**
          * 转动
+         * @param {Number} prize_index 奖品索引
          * @method run_fn
          */
         run_fn:function(prize_index){
@@ -110,7 +114,7 @@
          * 选择ID
          * @method byId
          * @param {String,Object} id 元素节点
-         * @return {Object} 等到元素节点对象
+         * @return {Object} 得到元素节点对象
          */
         byId:function(id){
             return typeof id==="string"? document.getElementById(id):id;
@@ -120,7 +124,7 @@
          * @method byTagName
          * @param {String} elem  TanName节点
          * @param {Object} obj  元素节点对象
-         * @return {Object} 等到元素节点对象
+         * @return {Object} 得到元素节点对象
          */
         byTagName:function(elem,obj){
             return (obj || document).getElementsByTagName(elem);
@@ -130,7 +134,7 @@
         * @method byClass
         * @param {String} sClass, class的名称
         * @param {Object} oPrent, 父元素class的对象
-        * @return {Object} 等到元素节点对象
+        * @return {Object} 得到元素节点对象
         */
         byClass:function(sClass,oPrent){
             var aClass=[],
