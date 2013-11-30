@@ -7,11 +7,11 @@
 
 - id_dom：元素ID
 - prize_arr：奖品的数组（从左上角开始，顺时针一圈）
-- round_count：旋转圈数
-- normal_speed：默认旋转速度
-- up_speed：中途加速
-- start_point：加速点
-- end_point：减速点 【最好要小于-（奖品个数*圈数的大小）】
+- round_count：旋转圈数,可以不写，默认为2圈
+- normal_speed：默认旋转速度，可以不写，默认为400
+- up_speed：中途加速，可以不写，默认为100
+- start_point：加速点，可以不写，但（根据实际情况建议写）
+- end_point：减速点 【最好要小于-（奖品个数*圈数的大小）】，可以不写，但（根据实际情况建议写）
 - show_result：回调函数
 
 
