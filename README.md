@@ -1,4 +1,7 @@
-小型组件库
+活动-组件库
 =========
 
-hello world
+----------
+- page：无刷新分页组件
+- RoundDraw：圆形抽奖转盘
+- squareDraw：正方形抽奖转盘
