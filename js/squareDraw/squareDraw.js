@@ -1,7 +1,6 @@
 /**
  * 抽奖组件（正方形）
  * User: xiejinlong@yy.com
- * Time: (2013-11-21 10:19)
  */
 (function() {
     "use strict";
