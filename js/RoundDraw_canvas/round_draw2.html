@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>基于canvas版的圆形抽奖</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        *{margin:0;padding:0;list-style-type:none;}
+        a,img{border:0;}
+        body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+        /* lottery */
+        #lottery{background:url("img/disc_bg.png") no-repeat;position:relative;height:426px;width:426px;margin:40px auto;}
+        #lottery #rotate_bg{ position:absolute;left:28px;top:28px;width:370px;height:370px;}
+        #lottery .lottery_star { width: 118px; height: 147px; background: url(img/lottery_star.png) no-repeat; position: absolute; left: 155px; top:125px;}
+        #lotteryBtn { cursor:pointer; width: 73px; height: 61px; background: url(img/rotate_static.jpg) no-repeat; font-size: 0; line-height: 0; overflow: hidden; position: absolute; left: 22px; top:55px;}
+        #lottery_num { position: absolute; left: 30px; top:98px; color: #fff; font-size: 14px}
+    </style>
+    <script type="text/javascript" src="http://sz.duowan.com/s/jquery/jquery.js"></script>
+</head>
+<body>
+    <div id="lottery">
+        <img src="img/disc_rotate.png" id="rotate_bg"/>
+        <div class="lottery_star">
+            <div id="lotteryBtn">抽奖</div>
+            <span id="lottery_num">还剩<span>12</span>次</span>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="RoundDraw.js"></script>
+<script type="text/javascript">
+$(function(){
+    var lottery=new RoundDraw({
+       "id_dom":"rotate_bg",
+       "round_count":4,
+       "prize_arr":['表情碎片X2','YY月费会员','表情成长值+30','抽奖机会+1','表情碎片X4','YY月票X10','表情成长值+100','YY年会会员','谢谢参与','表情成长值+50','表情碎片X2','iPad mini'],
+       "callback":function(prize){
+            var num=parseInt($("#lottery_num span").text())-1;
+            $("#lottery_num span").html(num);
+           alert(prize);
+       }
+   })
+
+
+    $("#lotteryBtn").click(function() {
+        lottery.set_prize("表情成长值+100");
+    }) 
+
+})
+   
+</script>
+</html>
