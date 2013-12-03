@@ -6,9 +6,9 @@
 
 参数说明：
 
-- selector：JQ选择元素
+- selector：JQ选择元素(选择图片)
 - duration：转动时间，可以不写，默认3秒
-- round_count：旋转圈数，可以不写，默认4秒
+- round_count：旋转圈数，可以不写，默认4圈
 - prize_arr：圆形转盘上“逆时针”方向的奖品数组
 - callback：回调函数
 
