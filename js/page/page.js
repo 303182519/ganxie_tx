@@ -52,7 +52,7 @@
 
             if(this.totle<=7){
                 //如果总页数<=7的话
-                this.for_page(1,7);
+                this.for_page(1,this.totle);
 
             }else{
                 //如果总页数>8的话
