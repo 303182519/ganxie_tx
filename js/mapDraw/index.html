@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="css/index.css?rel=@@timestamp" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://sz.duowan.com/s/jquery/jquery.js"></script>
+<!--[if IE 6]>
+<script type="text/javascript" src="http://sz.duowan.com/DD_belatedPNG.js"></script>
+<script type="text/javascript">DD_belatedPNG.fix('.pngfix')</script>
+<![endif]-->
+</head>
+
+<body>
+   <div class="wrap">
+        <!--舞台-->
+        <div class="stage">
+            <!--赛道-->
+            <div class="track">
+
+            </div>
+            <div class="domain"></div>
+            <img src="img/b_car.png" width="295" height="119" class="b_car"/>
+            <div class="tube_1"></div>
+            <div class="start">
+                <div class="start_text start_race">
+                     <div class="start_per">30%</div>
+                     <div class="start_name">启动</div>
+                </div>
+                <div class="right_btn pngfix"></div>
+            </div>
+        </div>
+
+   </div>
+
+</body>
+<script type="text/javascript" src="race.js"></script>
+<script type="text/javascript">
+    //创建汽车跑道轨迹
+    var car_race=new Race({
+        "selector":".b_car",
+        "round_count":4,
+        "normal_speed":2,
+        "map_locat":[
+            {"left":426,"top":356},
+            {"left":339,"top":346},
+            {"left":246,"top":321},
+            {"left":134,"top":333},
+            {"left":30,"top":333},
+            {"left":92,"top":280},
+            {"left":138,"top":239},
+            {"left":190,"top":189},
+            {"left":315,"top":189},
+            {"left":446,"top":189},
+            {"left":418,"top":236},
+            {"left":456,"top":277}
+        ],
+        "prize_arr":["金熊卡x1","24YY积分","3YY积分","8YY积分","3YY积分","8YY积分","3YY积分","24YY积分","银熊卡x2","8YY积分","3YY积分","3YY积分"],
+        "callback":function(prize){
+            console.log(prize);
+        }
+    });
+
+    //启动按钮
+    $(".start").on("click",".start_race",function(){
+        $(".b_car").animate({"width":115,"height":55,"left":632,top:275},1000,function(){
+           $(this).animate({"left":446,"top":298},500,function(){
+               //_this.car_race.car_move(0)
+               car_race.set_prize("银熊卡x2");
+           })
+        })
+    })
+
+    
+</script>
+</html>

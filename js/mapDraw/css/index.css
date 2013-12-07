@@ -1,0 +1,39 @@
+@charset "utf-8";
+/*******************重定义浏览器默认样式**************/
+body,div, dl, dt, dd, ul, ol, li,
+h1, h2, h3,form,input, button,
+textarea, p, blockquote, th, td {
+    margin: 0;
+    padding: 0;
+}
+img { border:none 0;}
+ol, ul { list-style: none; }
+a:link, a:visited { text-decoration: none;}
+a:hover { text-decoration: underline;}
+.clear{ clear: both; font-size:1px; width:1px; height:0; visibility: hidden; }
+.center{ text-align:center;}
+table {border-collapse:collapse;border-spacing: 0;}
+.clearfix:after{content:".";display:block;height:0;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}
+.green { color: #56bf39;}
+.fl { float: left;}
+.fr { float: right;}
+.rel { position: relative;}
+
+
+body{ font-family:Arial, Helvetica,sans-serif,SimSun; font-size: 12px; background: #0b1531;}
+    .wrap { width: 1000px; margin: 0 auto; background:url(../img/bg.jpg) no-repeat; height: 665px;}
+        /*上半部分*/
+        .stage { height: 447px; position: relative;}
+            .track { width: 552px; height: 270px; background: url(../img/track/track_bg.jpg?rel=@@timestamp) no-repeat; position: relative; top: 177px; left: 11px;}
+
+            .domain { width: 363px; height: 96px; background: url(../img/domain.jpg?rel=@@timestamp) no-repeat; position: absolute; top:271px; left: 563px;}
+            .b_car { position: absolute; top:214px; left: 563px;}
+            .tube_1 { width:95px; height: 61px; background: url(../img/tube_1.jpg?rel=@@timestamp) no-repeat; position: absolute; top:367px; left: 817px;}
+            .start { width: 268px; height: 249px; position: absolute; top:155px; right: 0;}
+                .start_text { color: #fff; position: absolute; top:30px; left: 40px; text-align: center; width: 188px; height:138px; padding-top: 50px; z-index: 2}
+                .start_race { cursor: pointer;}
+                    .start_per { color: #71ff1c; font-size: 24px;}
+                    .start_name { font-size: 36px; font-weight: bold; }
+                .right_btn { width: 268px; height: 249px; background: url(../img/right_btn.png?rel=@@timestamp) no-repeat;}
+
