@@ -30,8 +30,8 @@
             this.award_count = obj.prize_arr.length;
             //跑动的圈数
             this.round_count=obj.round_count || 4;
-            //物体的正常速度
-            this.normal_speed=obj.normal_speed || 2;
+            //物体的启动速度
+            this.start_speed=obj.normal_speed || 2;
             //总步数
             this.total_step=0;
             //当前跑动的步数
@@ -54,7 +54,7 @@
             this.prize=prize;
             this.round_index = 0;
             this.setp_index = 0;
-            this.normal_speed=2;
+            this.normal_speed=this.start_speed;
             var arr_index=this.find_prize_index(prize);
             if(arr_index!=-1){
                 this.prize_index=this.random_index(arr_index)+1;
