@@ -240,7 +240,7 @@
                 if(data['status']==200){
                     callback(datas);
                 }else{
-                    alert("拉取我的积分数据失败"+data.message);
+                    alert("拉取任务状态数据失败"+data.message);
                 }
             })
         },
@@ -264,6 +264,20 @@
             })
         },
         /**
+         * 我的包裹   
+         * @param  {Function} callback 回调
+         */
+        myPackage:function(callback){
+            geturl(this.taskUrl+"play/myPackage.do",{"actId":this.actId},function(data){
+                var datas=data.data;
+                if(data['status']==200){
+                    callback(datas);
+                }else{
+                    alert("拉取我的包裹数据失败"+data.message);
+                }
+            })
+        },
+        /**
          * 抽奖
          * @param {String} pointType  使用的积分类型(默认使用pt_0）
          * @param {Function} callback 回调
@@ -277,7 +291,7 @@
                         _this.lotteryCb(datas[0],callback);
                     }                
                 }else{
-                    alert(data.message);
+                    alert("抽奖出错"+data.message);
                 }
             }) 
         },
@@ -321,9 +335,31 @@
             geturl(this.taskUrl+"play/holdAwardConf.do",{"actId":this.actId,"awardId":dataObj['awardId']},function(data){
                 var datas=data.data;
                 if(data['status']==200){
-                    callback(datas,dataObj)            
+                    callback("hold",datas);            
                 }else{
-                    alert(data.message);
+                    alert("拉取可变奖品配置数据失败"+data.message);
+                }
+            }) 
+        },
+        /**
+         * 设定可变奖品信息
+         * @param  {Sting}   orderId    中奖产生的订单号
+         * @param  {String}   holdConfId 可变奖品配置的id
+         * @param  {Function} callback   回调
+         */
+        fillHoldAwardConf:function(orderId,holdConfId,callback){
+            var _this=this;
+            geturl(this.taskUrl+"play/fillHoldAwardConf.do",{"orderId":orderId,"holdConfId":holdConfId},function(data){
+                var datas=data.data;
+                if(data['status']==200){
+                    callback(function(dataObj,callback){
+                        //为激活码礼包
+                        _this.codeGrant(dataObj['orderId'],function(prizeStyle,dispenseResult){
+                           callback(prizeStyle,dataObj,dispenseResult); 
+                        }); 
+                    });            
+                }else{
+                    alert("设定可变奖品信息失败"+data.message);
                 }
             }) 
         },
@@ -333,8 +369,7 @@
          * @return {Array}         根据目前玩的游戏进行筛选的结果数组
          */
         selHoldAwardConf:function(dataArr){
-            var selPrize=[];
-            
+            var selPrize=[];            
             for(var i=0; i<this.gameArr.length; i++){
                 for(var j=0; j<dataArr.length; j++){
                     if(dataArr[j]['showAward']==this.gameArr[i]['game']){
@@ -376,7 +411,7 @@
 
                    _this.lookCodeCb(data.data[0],orderId,callback); 
                 }else{
-                    alert(data.message);
+                    alert("通过我的包裹查找激活码失败"+data.message);
 
                 }
             })

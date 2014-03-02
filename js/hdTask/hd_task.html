@@ -37,6 +37,11 @@ $(function(){
 				_this.btn_statue(dataObj);
 			})
 
+			//我的包裹
+			hdObject.myPackage(function(dataArr){
+				console.log(dataArr);
+			})
+
 
 			//抽奖
 			hdObject.lottery("pt_0",function(prizeStyle,dataObj,orther){
@@ -51,8 +56,16 @@ $(function(){
 	                    //dataObj为可变参数礼包信息
 	                    console.log("可变参数礼包:");                  
 	                    //这里要根据业务是否对orther进行过滤(根据返回来的中奖名字)，比如游戏礼包经常需要过滤，game秀的话就不用
-	                    //var orther=hdObject.holdAwardConf(orther);
+	                    //var orther=hdObject.selHoldAwardConf(orther);
+	                    /*hdObject.fillHoldAwardConf(dataObj['orderId'],orther[0]['id'],function(callback){
+	                    	//此处的callback是用来取激活码的。根据业务需要是否要调用
+	                    	callback(dataObj,function(prizeStyle,dataObj,orther){
+
+	                    	});
+	                    })*/
 	                    console.log(orther);
+
+
 
 	                    break;
 	                default:
