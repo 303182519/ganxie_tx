@@ -187,11 +187,7 @@
             var tasksArr=dataProcess.formatTasksId(entrys);
 
             //克隆一个出来，内部用的，防止外面的更改，影响到内部
-            this.gameArr=$.map(gameArr,function(n){ return n});
-
-            //查询任务状态
-            //_this.taskStatus(tasksId);
-            
+            this.gameArr=$.map(gameArr,function(n){ return n});          
 
             callback(gameArr,tasksArr);
 
@@ -289,6 +285,8 @@
                 if(data['status']==200){
                     if(datas.length==1){
                         _this.lotteryCb(datas[0],callback);
+                    }else{
+                       callback("other",datas);
                     }                
                 }else{
                     alert("抽奖出错"+data.message);
