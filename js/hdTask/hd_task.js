@@ -66,70 +66,101 @@
             return dataGS;
         },
         /**
-         * 一个游戏一个任务完成
-         * @param  {Array} dataGSN 数组对象
-         * @param  {Array} entrys  任务参数
-         * @return {Array}         集gameId、serverId、gameName的数组对象
-         */
-        oneToOne:function(dataGSN,entrys){
-            for(var i=0, dataGSN_len=dataGSN.length; i<dataGSN_len; i++){
-                dataGSN[i]['serverId']=entrys[i]['tasks'][0]['joinGs'][0]['serverId'];
-            }
-            return dataGSN;
-        },
-        /**
-         * 一个游戏多个任务完成
+         * 一个游戏有多个任务，任务可以由多个游戏完成
          * @param  {Array} dataGSN 数组对象
          * @param  {Array} first_task_joinGs  第一个任务参加的数组对象
          * @return {Array}         集gameId、serverId、gameName的数组对象
          */
-        oneToMore:function(dataGSN,first_task_joinGs){
+        oTmTm:function(dataGSN,first_task_joinGs){
             for(var i=0, dataGSN_len=dataGSN.length; i<dataGSN_len; i++){
                 dataGSN[i]['serverId']=first_task_joinGs[i]['serverId'];
             }
             return dataGSN;
         },
         /**
+         * 一个游戏只有一个任务，只能当前游戏完成
+         * @param  {Array} dataGSN 数组对象
+         * @param  {Array} entrys  任务参数
+         * @return {Array}         集gameId、serverId、gameName的数组对象
+         */
+        oToTo:function(dataGSN,entrys){
+            for(var i=0, dataGSN_len=dataGSN.length; i<dataGSN_len; i++){
+                dataGSN[i]['serverId']=entrys[i]['tasks'][0]['joinGs'][0]['serverId'];
+            }
+            return dataGSN;
+        },
+        
+        /**
+         * 一个游戏有多个任务，任务只能当前游戏完成
+         * @param  {Array} dataGSN 数组对象
+         * @param  {Array} entrys  任务参数
+         * @return {Array}         集gameId、serverId、gameName的数组对象
+         */
+        oTmTo:function(dataGSN,entrys){
+            return this.oToTo(dataGSN,entrys);
+        },
+        /**
          * 格式化返回来的数据，生成合适的游戏列表数据
          * @param {Array} entrys  任务参数
+         * @param  {String} tasktype 任务类型
          * @return {Array} 得到游戏的数组对象
          */
-        formatGame:function(entrys){
+        formatGame:function(entrys,tasktype){
             var dataGSN=this.createGSN(entrys),
                 first_task=entrys[0]['tasks'][0];          
                 
             //获得之前参加的任务joinGs
             if(first_task['taskStatus']!=0){
-                if(first_task['joinGs'].length>1){
-                    //一个游戏多个任务完成
-                    dataGSN=this.oneToMore(dataGSN,first_task['joinGs']);
-                }else if(first_task['joinGs'].length==1){
-                    //一个游戏一个任务完成
-                    dataGSN=this.oneToOne(dataGSN,entrys);
-                }
+
+                switch(tasktype){
+                    case "oTmTm":
+                        dataGSN=this.oTmTm(dataGSN,first_task['joinGs']);
+                    break;
+                    case "oToTo":
+                        dataGSN=this.oToTo(dataGSN,entrys);
+                    break;
+                    case "oTmTo":
+                        dataGSN=this.oTmTo(dataGSN,entrys);
+                    break;         
+                }  
             }
             
             return dataGSN;
         },
         /**
+         * 1.一个游戏有多个任务，任务可以由多个游戏完成(oTmTm)
+         * 2.一个游戏只有一个任务，只能当前游戏完成(oToTo)
+         * 3.一个游戏有多个任务，任务只能当前游戏完成(oTmTo)
+         * 
          * 格式化返回来的数据，生成合适的tasksId数组
          * @param {Array} dataObj  ajax返回的对象
+         * @param  {String} tasktype 任务类型
          * @return {Array} 得到tasksId的数组
          */
-        formatTasksId:function(entrys){
+        formatTasksId:function(entrys,tasktype){
             var tasksArr=[],
                 first_task=entrys[0]['tasks'];
 
-            if(first_task.length>1){
-                for(var i=0,first_task_len=first_task.length; i<first_task_len; i++){
-                   tasksArr.push(first_task[i]['id']);  
-                }
-            }else if(first_task.length==1){
-                for(var i=0, entrys_len=entrys.length; i<entrys_len; i++){
-                    tasksArr.push(entrys[i]['tasks'][0]['id']);
-                }
+            switch(tasktype){
+                case "oTmTm":
+                    for(var i=0,first_task_len=first_task.length; i<first_task_len; i++){
+                       tasksArr.push(first_task[i]['id']);  
+                    }
+                break;
+                case "oToTo":
+                    for(var i=0, entrys_len=entrys.length; i<entrys_len; i++){
+                        tasksArr.push(entrys[i]['tasks'][0]['id']);
+                    }
+                break;
+                case "oTmTo":
+                    for(var i= 0, entrys_len=entrys.length; i<entrys_len; i++ ){
+                        for(var j= 0, tasks_arr_len=entrys[i]['tasks'].length; j<tasks_arr_len; j++){
+                            tasksArr.push(entrys[i]['tasks'][j]['id']);
+                        }
+                    }
+                break;           
             }    
-            
+          
             return tasksArr;
         }
     }
@@ -159,16 +190,21 @@
         //轮询次数
         poll:1,
         /**
-         * 任务初始化（活动配置）
+         * 任务初始化（活动配置）,目前已知有三种情况
+         * 1.一个游戏有多个任务，任务可以由多个游戏完成(oTmTm)
+         * 2.一个游戏只有一个任务，只能当前游戏完成(oToTo)
+         * 3.一个游戏有多个任务，任务只能当前游戏完成(oTmTo)
+         * 
          * @param  {Function} callback 回调
+         * @param  {String} tasktype 任务类型
          */
-        taskInit:function(callback){
+        taskInit:function(callback,tasktype){
             var _this=this;
             geturl(this.taskUrl+"act/commonConf.do",{"actId":this.actId},function(data){
                 var datas=data.data;
                 if(data['status']==200 && datas.entrys.length){
 
-                    _this.taskInitCb(datas.entrys,callback);
+                    _this.taskInitCb(datas.entrys,callback,tasktype);
 
                 }else{
                     alert("任务初始化失败"+data.message);
@@ -179,12 +215,13 @@
          * 任务初始化回调
          * @param  {Array}   entrys     返回来的数组对象
          * @param  {Function} callback      外面的回调
+         * @param  {String} tasktype 任务类型
          */
-        taskInitCb:function(entrys,callback){
+        taskInitCb:function(entrys,callback,tasktype){
             callback = callback || function () {};
 
-            var gameArr=dataProcess.formatGame(entrys);
-            var tasksArr=dataProcess.formatTasksId(entrys);
+            var gameArr=dataProcess.formatGame(entrys,tasktype);
+            var tasksArr=dataProcess.formatTasksId(entrys,tasktype);
 
             //克隆一个出来，内部用的，防止外面的更改，影响到内部
             this.gameArr=$.map(gameArr,function(n){ return n});          
@@ -192,7 +229,7 @@
             callback(gameArr,tasksArr);
 
             //批量参加任务
-            this.BatchToTask(entrys);
+            this.BatchToTask(entrys,tasktype);
         },
         /**
          * 我的积分（按钮的状态--马上领取、可领取，已领取）
@@ -433,25 +470,36 @@
             }
         },
         /**
+         * 1.一个游戏有多个任务，任务可以由多个游戏完成(oTmTm)
+         * 2.一个游戏只有一个任务，只能当前游戏完成(oToTo)
+         * 3.一个游戏有多个任务，任务只能当前游戏完成(oTmTo)
          * 批量参加任务
          * @param {Array} entrys    任务参数数组对象
+         * @param  {String} tasktype 任务类型
          */
-        BatchToTask:function(entrys){
-            var first_task=entrys[0]['tasks'];
+        BatchToTask:function(entrys,tasktype){
 
-            if(first_task.length==1){
-                //一个游戏一个任务完成
-                this.batchSubmitTask(entrys);
-            }else if(first_task.length>1){
-                //一个游戏多个任务完成
-                this.join4MulEntry(entrys);
-            }
+         
+            switch(tasktype){
+                case "oTmTm":
+                    this.oTmTmTask(entrys);
+                break;
+                case "oToTo":
+                    this.oToToTask(entrys);
+                break;
+                case "oTmTo":
+                    this.oTmToTask(entrys);
+                break;         
+            } 
+
+
+            
         },
         /**
-         * 批量参加任务（一个游戏一个任务完成，task_single）
+         * 一个游戏只有一个任务，只能当前游戏完成(oToTo)
          * @param {array} entrys 任务参数
          */
-        batchSubmitTask:function(entrys){
+        oToToTask:function(entrys){
             var task_str="",
                 _this=this,
                 dataGS=dataProcess.create_gs(entrys);   
@@ -468,10 +516,11 @@
             })
         },
         /**
-         * 批量参加任务（一个游戏多个任务完成,task_more）
+         * 一个游戏有多个任务，任务可以由多个游戏完成(oTmTm)
          * @param {array} entrys 任务参数
          */
-        join4MulEntry:function(entrys){
+        oTmTmTask:function(entrys){
+        
             var task_arr=entrys[0]['tasks'],
                 dataGS=dataProcess.create_gs(entrys),
                 _this=this;
@@ -485,8 +534,32 @@
                     }
                 }
             })
-        }
-    
+        },
+        /**
+         * 一个游戏有多个任务，任务只能当前游戏完成(oTmTo)
+         * @param {array} entrys 任务参数
+         */
+        oTmToTask:function(entrys){
+            var taskParam=[],
+                task_str="",
+                _this=this;
+
+
+            for(var i= 0, entrys_len=entrys.length; i<entrys_len; i++ ){
+                for(var j= 0, tasks_arr_len=entrys[i]['tasks'].length; j<tasks_arr_len; j++){
+                    var obj={};
+                    obj.gameId=entrys[i]['gameId'];
+                    obj.serverId=entrys[i]['serverId'];
+                    obj.taskId=entrys[i]['tasks'][j]['id'];
+                    taskParam.push(obj);
+                }
+            }
+            seajs.use(this.jqueryJson,function(){
+                task_str=$.toJSON(taskParam);
+                geturl(_this.taskUrl+"task/batchSubmitTask.do",{"actId":_this.actId,"taskParam":task_str},function(){
+                })
+            })
+        }    
         
     }
 
