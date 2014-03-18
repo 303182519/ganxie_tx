@@ -22,7 +22,12 @@ $(function(){
 
 
 
-			
+			/**
+			 * 任务初始化（活动配置）,目前已知有三种情况
+	         * 1.一个游戏有多个任务，任务可以由多个游戏完成(oTmTm)
+	         * 2.一个游戏只有一个任务，只能当前游戏完成(oToTo)
+	         * 3.一个游戏有多个任务，任务只能当前游戏完成(oTmTo)
+			 */
 
 			//任务初始化
 			hdObject.taskInit(function(gameArr,tasksArr){
