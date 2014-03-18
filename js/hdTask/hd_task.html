@@ -30,7 +30,7 @@ $(function(){
 				//生成游戏
 				_this.create_game(gameArr);
 
-
+				
 				//任务状态
 				hdObject.taskStatus(tasksArr,function(dataArr){
 					_this.taskStatus(dataArr);
@@ -48,7 +48,39 @@ $(function(){
 			})
 
 
-			
+			//抽奖
+			hdObject.lottery("pt_0",function(prizeStyle,dataObj,orther){
+				console.log("中奖信息");
+				
+				switch(prizeStyle){
+	                case "code":
+	                    //dataObj为激活码礼包信息
+	                    console.log("激活码:"+orther);        
+	                    break;
+	                case "hold":
+	                    //dataObj为可变参数礼包信息
+	                    console.log("可变参数礼包:");                  
+	                    //这里要根据业务是否对orther进行过滤(根据返回来的中奖名字)，比如游戏礼包经常需要过滤，game秀的话就不用
+	                    //var orther=hdObject.selHoldAwardConf(orther);
+	                    /*hdObject.fillHoldAwardConf(dataObj['orderId'],orther[0]['id'],function(callback){
+	                    	//此处的callback是用来取激活码的。根据业务需要是否要调用
+	                    	callback(dataObj,function(prizeStyle,dataObj,orther){
+
+	                    	});
+	                    })*/
+	                    console.log(orther);
+
+
+
+	                    break;
+	                default:
+	                    //dataObj为其他礼包信息
+	                    console.log("其他礼包信息:");                    
+	            }
+
+				console.log(dataObj); 
+	            
+			})
 
 			//抽奖动态
 			/*hdObject.dynamics(function(dataArr){
