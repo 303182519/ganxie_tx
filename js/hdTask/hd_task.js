@@ -278,7 +278,7 @@
         exchange:function(awardId,callback){
             geturl(this.taskUrl+"play/exchange.do",{"actId":this.actId,"awardId":awardId},function(data){
                 if(data['status']==200){
-                    callback || callback();
+                    callback && callback();
                 }else{
                     alert(data.message);
                 }
@@ -289,10 +289,10 @@
          * @param  {String} taskId   任务ID
          * @param  {Function} callback 回调
          */
-        finishTask:function(taskId){
+        finishTask:function(taskId,callback){
             geturl(this.taskUrl+"task/finishTask.do",{"taskId":taskId},function(data){
                 if(data['status']==200){
-                    callback || callback();
+                    callback && callback();
                 }else{
                     seajs.log(data.message);
                 }
