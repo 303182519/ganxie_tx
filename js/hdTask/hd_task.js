@@ -204,7 +204,7 @@
                 var datas=data.data;
                 if(data['status']==200 && datas.entrys.length){
 
-                    _this.taskInitCb(datas.entrys,callback,tasktype);
+                    _this.taskInitCb(datas,callback,tasktype);
 
                 }else{
                     alert("任务初始化失败"+data.message);
@@ -217,19 +217,19 @@
          * @param  {Function} callback      外面的回调
          * @param  {String} tasktype 任务类型
          */
-        taskInitCb:function(entrys,callback,tasktype){
+        taskInitCb:function(datas,callback,tasktype){
             callback = callback || function () {};
 
-            var gameArr=dataProcess.formatGame(entrys,tasktype);
-            var tasksArr=dataProcess.formatTasksId(entrys,tasktype);
+            var gameArr=dataProcess.formatGame(datas.entrys,tasktype);
+            var tasksArr=dataProcess.formatTasksId(datas.entrys,tasktype);
 
             //克隆一个出来，内部用的，防止外面的更改，影响到内部
             this.gameArr=$.map(gameArr,function(n){ return n});          
 
-            callback(gameArr,tasksArr);
+            callback(gameArr,tasksArr,datas);
 
             //批量参加任务
-            this.BatchToTask(entrys,tasktype);
+            this.BatchToTask(datas.entrys,tasktype);
         },
         /**
          * 我的积分（按钮的状态--马上领取、可领取，已领取）
@@ -256,6 +256,49 @@
                 }
             })
         },
+        /**
+         * 可兑换的奖品
+         * @param  {Function} callback 回调
+         */
+        canExchange:function(callback){
+            var _this=this;
+            geturl(this.taskUrl+"play/canExchange.do",{"actId":this.actId},function(data){
+                if(data['status']==200){
+                    callback(data['data']);
+                }else{
+                    alert("拉取可兑换的奖品据失败"+data.message);
+                }
+            })
+        },
+        /**
+         * 兑换奖品
+         * @param {String} awardId  可兑换奖品id
+         * @param  {Function} callback 回调
+         */
+        exchange:function(awardId,callback){
+            geturl(this.taskUrl+"play/exchange.do",{"actId":this.actId,"awardId":awardId},function(data){
+                if(data['status']==200){
+                    callback || callback();
+                }else{
+                    alert(data.message);
+                }
+            })
+        },
+        /**
+         * 完成任务
+         * @param  {String} taskId   任务ID
+         * @param  {Function} callback 回调
+         */
+        finishTask:function(taskId){
+            geturl(this.taskUrl+"task/finishTask.do",{"taskId":taskId},function(data){
+                if(data['status']==200){
+                    callback || callback();
+                }else{
+                    seajs.log(data.message);
+                }
+            })
+        },
+
         /**
          * 查询任务状态,未领取，未完成或已完成。
          * 返回的数据格式   0 未领取任务  1 任务进行中  100任务已完成
