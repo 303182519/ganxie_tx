@@ -4,7 +4,7 @@
  * Time: (2013-12-03 10:19)
  */
 (function() {
-    var instance;
+    
     /**
      * Constructs RoundDraw objects
      * @class RoundDraw
@@ -131,21 +131,15 @@
         }
     }
 
-    //主要是用于惰性实例化
-    function RoundLottery(obj){
-        if(!instance){
-            instance=new RoundDraw(obj);
-        }
-        return instance
-    }
+    
 
 
     if (typeof module !== 'undefined' && module.exports) {
-        module.exports = RoundLottery;
+        module.exports = RoundDraw;
     } else if (typeof define === 'function' && define.cmd) {
-        define(function(){return RoundLottery;});
+        define(function(){return RoundDraw;});
     } else {
-        (function(){ return this || (0,eval)('this'); }()).RoundLottery = RoundLottery;
+        (function(){ return this || (0,eval)('this'); }()).RoundDraw = RoundDraw;
     }
 
 }());
