@@ -8,6 +8,9 @@
 - myPackage：我的包裹
 - lottery：抽奖
 - dynamics：抽奖动态
+- canExchange：可兑换的奖品
+- exchange：兑换奖品
+- finishTask：完成任务
 
 
 
