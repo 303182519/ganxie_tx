@@ -1,5 +1,5 @@
 /**
- * 抽奖组件（正方形）
+ * 抽奖组件正方形
  * User: xiejinlong@yy.com
  */
 (function() {
