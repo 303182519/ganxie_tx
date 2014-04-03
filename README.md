@@ -8,3 +8,4 @@
 - RoundDraw_canvas：基于canvas版的圆形抽奖
 - mapDraw：地图轨迹运动抽奖组件
 - hdTask：活动任务系统SDK
+- moveScroll：模拟滚动条
