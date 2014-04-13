@@ -291,11 +291,7 @@
          */
         finishTask:function(taskId,callback){
             geturl(this.taskUrl+"task/finishTask.do",{"taskId":taskId},function(data){
-                if(data['status']==200){
-                    callback && callback();
-                }else{
-                    seajs.log(data.message);
-                }
+                callback && callback(data);
             })
         },
 
@@ -508,7 +504,7 @@
                 if(this.poll<=5){
                     this.poll_page(orderId,callback);
                 }else{
-                    alert("激活码发放失败，请联系客服!");
+                    alert("恭喜您获得"+dataObj.awardName+"，激活码发放失败，请联系客服!");
                 }
             }
         },
