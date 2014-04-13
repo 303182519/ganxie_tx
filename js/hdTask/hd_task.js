@@ -288,10 +288,20 @@
          * 完成任务
          * @param  {String} taskId   任务ID
          * @param  {Function} callback 回调
+         * @param {Function} errorback 错误回调回调
          */
         finishTask:function(taskId,callback){
             geturl(this.taskUrl+"task/finishTask.do",{"taskId":taskId},function(data){
-                callback && callback(data);
+                if(data['status']==200){
+                    callback && callback(data);
+                }else{
+                    if(errorback){
+                        errorback(data);
+                    }else{
+                        alert("完成任务出错"+data.message);
+                    }
+                }
+               
             })
         },
 
@@ -353,8 +363,9 @@
          * 抽奖
          * @param {String} pointType  使用的积分类型(默认使用pt_0）
          * @param {Function} callback 回调
+         * @param {Function} errorback 错误回调回调
          */
-        lottery:function(pointType,callback){
+        lottery:function(pointType,callback,errorback){
            var _this=this; 
            geturl(this.taskUrl+"play/lottery2.do",{"actId":this.actId,"pointType":pointType},function(data){
                 var datas=data.data;
@@ -365,7 +376,11 @@
                        callback("other",datas);
                     }                
                 }else{
-                    alert("抽奖出错"+data.message);
+                    if(errorback){
+                        errorback();
+                    }else{
+                        alert("抽奖出错"+data.message);
+                    }
                 }
             }) 
         },
@@ -504,6 +519,7 @@
                 if(this.poll<=5){
                     this.poll_page(orderId,callback);
                 }else{
+                    this.poll=1;
                     alert("恭喜您获得"+dataObj.awardName+"，激活码发放失败，请联系客服!");
                 }
             }
