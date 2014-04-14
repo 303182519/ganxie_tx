@@ -290,7 +290,7 @@
          * @param  {Function} callback 回调
          * @param {Function} errorback 错误回调回调
          */
-        finishTask:function(taskId,callback){
+        finishTask:function(taskId,callback,errorback){
             geturl(this.taskUrl+"task/finishTask.do",{"taskId":taskId},function(data){
                 if(data['status']==200){
                     callback && callback(data);
