@@ -51,8 +51,8 @@
             this.start_point=obj.start_point || 6;
             //结束点
             this.end_point=obj.end_point || 20,
-            //展示结果的方法
-            this.show_result=obj.show_result || function(){};
+                //展示结果的方法
+                this.show_result=obj.show_result || function(){};
 
             //定时器_执行连接
             this.timer_link=null;
@@ -69,9 +69,9 @@
             this.prize=prize;
             this.suiji.style.display="block";
             var prize_index=this.find_prize_index(prize);
-            if(arr_index!=-1){
-                prize_index=this.random_index(arr_index)+1;
-                this.run_fn(++prize_index);
+            if(prize_index!=-1){
+                prize_index=this.random_index(prize_index)+1;
+                this.run_fn(prize_index);
             }
 
         },
@@ -144,12 +144,12 @@
             return (obj || document).getElementsByTagName(elem);
         },
         /**
-        *  选择class节点
-        * @method byClass
-        * @param {String} sClass, class的名称
-        * @param {Object} oPrent, 父元素class的对象
-        * @return {Object} 得到元素节点对象
-        */
+         *  选择class节点
+         * @method byClass
+         * @param {String} sClass, class的名称
+         * @param {Object} oPrent, 父元素class的对象
+         * @return {Object} 得到元素节点对象
+         */
         byClass:function(sClass,oPrent){
             var aClass=[],
                 reClass=new RegExp("(^|\\s)"+sClass+"(\\s|$)"),
