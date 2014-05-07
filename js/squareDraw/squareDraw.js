@@ -69,8 +69,21 @@
             this.prize=prize;
             this.suiji.style.display="block";
             var prize_index=this.find_prize_index(prize);
-            prize_index!=-1 && this.run_fn(++prize_index);
+            if(arr_index!=-1){
+                prize_index=this.random_index(arr_index)+1;
+                this.run_fn(++prize_index);
+            }
 
+        },
+        /**
+         * 从选择到的奖品数组中，随机抽中一个
+         * @param {Array} arr_index 中的奖品数组
+         * @return {Number} 得到真正的奖品索引
+         * @method random_index
+         */
+        random_index:function(arr_index){
+            var index=Math.floor(Math.random()*arr_index.length);
+            return arr_index[index];
         },
         /**
          * 寻找获得奖品在数组中的索引
@@ -79,8 +92,9 @@
          * @method find_prize_index
          */
         find_prize_index:function(prize){
-            for(var i=0; i<this.award_count;i++) if(this.prize_arr[i]==prize) return i;
-            return -1;
+            var arr=[];
+            for(var i=0; i<this.award_count;i++) if(this.prize_arr[i]==prize) arr.push(i);
+            return arr.length ? arr : -1;
         },
         /**
          * 转动
