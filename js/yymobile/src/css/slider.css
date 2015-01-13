@@ -1,0 +1,96 @@
+/*重置样式*/
+@import url('normalize.css?__inline');
+
+@import url('test.css?__inline');
+
+html,body {
+    width: 100%;
+    font-family: "microsoft yahei",Tahoma,Verdana,Arial,Helvetica,"宋体",sans-serif;
+    font-size: 12px;
+    color: #fff;
+    height: 100%;
+    line-height: 1.5
+}
+
+body {
+    padding: 0;
+    margin: 0 auto;
+}
+ul,li,dl,dt,dd {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+
+.text-center {
+    text-align: center
+}
+
+
+.fr {
+    float: right
+}
+
+.fl {
+    float: left
+}
+
+.clearfix {
+    clear: both
+}
+.ib {
+    display: inline-block;
+}
+
+.hidden-val {
+    height: 0;
+    overflow: hidden;
+    font-size: 0;
+    line-height: 0;
+    text-indent: -9999px;
+}
+
+.hide {
+    display: none
+}
+
+
+/*图片轮播*/
+.slider {
+    background-color: #f3f3f3;
+    text-align: center;
+}
+.slider_con {
+    width: 320px;
+    position: relative;
+    margin: 0 auto;
+    transition: -webkit-transform 0.6s ease;
+    overflow: hidden;
+}
+.slider_page {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.slider_page li {
+    float: left;
+    width: 4px;
+    height: 4px;
+    background-color: rgba(255,255,255,.2);
+    border-radius: 100%;
+    margin: 0 2px;
+}
+.slider_page .cur {
+    background-color: #fff;
+}
+.slider_list li {
+    float: left;
+}
+.slider_list li img {
+    display: block;
+}
+
+
+/*媒体查询*/
+@import url('media.css?__inline');}

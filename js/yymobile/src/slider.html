@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	 <!--本行代码解决实际显示的分辨率不是手机的分辨率的bug, initial-scale=1.0 初始的缩放比例 maximum-scale=1.0 最大的缩放比例 user-scalable=no 是否支持缩放-->
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <!-- safari允许全屏模式浏览 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+
+	<title>YY移动端框架</title>
+	<link rel="stylesheet" href="css/slider.css?__inline"/>
+</head>
+<body>
+	<div class="slider" id="slider">
+		<div class="slider_con">
+			<ul class="slider_list clearfix">
+				<li><img src="img/image1.png" alt="" width="100%" /></li>
+				<li><img src="img/image2.png" alt="" width="100%" /></li>
+				<li><img src="img/image3.png" alt="" width="100%" /></li>
+				<li><img src="img/image4.png" alt="" width="100%" /></li>
+			</ul>
+			<ul class="slider_page">
+				<li class="cur"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul> 	
+		</div>	
+	</div>
+
+
+	<script src="js/slider.js?__inline"></script>
+</body>
+</html>

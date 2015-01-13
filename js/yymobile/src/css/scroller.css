@@ -1,0 +1,67 @@
+.content,.screen,.screen .main  {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+.screen-all {
+    height: 100%;
+    width: 100%;
+    transition: -webkit-transform 0.6s ease;
+    transition: transform 0.6s ease;
+    position: absolute;
+    left: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.screen01-text {
+    background-image: url("../img/screen-01-text.png");
+    background-size: 255px 120px;
+    background-repeat: no-repeat;
+    width: 255px;
+    height: 120px;
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    margin-left: -127px
+}
+
+.screen01-text {
+    -webkit-animation: bounceInDown 0.6s linear 0.1s;
+    animation: bounceInDown 0.6s linear 0.1s;
+}
+
+.an-util-forwards {
+    -webkit-animation-fill-mode: forwards !important;
+    animation-fill-mode: forwards !important;
+}
+
+
+
+.all-img {
+    background-image: url("../img/all.png");
+    background-size: 550px 424px;
+    background-repeat: no-repeat
+}
+
+.logo {
+    background-position: 0 0;
+    width: 43px;
+    height: 35px;
+}
+
+.logo-title {
+    background-position: 0 -39px;
+    width: 55px;
+    height: 21px
+}
+
+.logo-all {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+
+}
