@@ -65,7 +65,6 @@ ul,li,dl,dt,dd {
     width: 320px;
     position: relative;
     margin: 0 auto;
-    transition: -webkit-transform 0.6s ease;
     overflow: hidden;
 }
 .slider_page {
@@ -84,6 +83,10 @@ ul,li,dl,dt,dd {
 .slider_page .cur {
     background-color: #fff;
 }
+.slider_list {
+    transition: -webkit-transform 0.6s ease;
+}
+
 .slider_list li {
     float: left;
 }

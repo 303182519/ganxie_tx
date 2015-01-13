@@ -16,7 +16,10 @@ __inline('./common/slider.js');
 
 
 $(function(){
-    new Slider("slider",{
-        width:320
+    var a=new Slider("slider",{
+        width:320,
+        touchmove:function(obj){
+        	//console.log(obj);
+        }
     });
 })

@@ -13,79 +13,125 @@ function Slider(s,opts){
 Slider.prototype={
     //默认属性
     _default_opts:{
-        width:320
+        width:320,
+        distance:10,
+        stopPropagation:true,
+        touchmove:function(){}
+    },
+    extend:function(target, source) {
+        for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+                target[key] = source[key];
+            }
+        }
+        return target;
     },
     //初始化
     init:function(s,opts){
 
-        this.opts = $.extend(this._default_opts, opts);
+        this.opts = this.extend(this._default_opts, opts);
         this.nowPage = 0;
 
         this.selector(s);
         this.layout();
         this.bindEvent();
-
-
     },
     //选择器
     selector:function(s){
-        this.slider      = $("#"+s);
-        this.slider_list = this.slider.find(".slider_list").eq(0);
-        this.slider_con  = this.slider.find(".slider_con").eq(0);
-        this.slider_page = this.slider.find(".slider_page").eq(0);
-        this.maxPage     = this.slider_list.find("li").length;
+        this.slider         =  document.querySelector('#'+s);
+        this.slider_list    = this.slider.querySelectorAll('.slider_list')[0];
+        this.slider_con     = this.slider.querySelectorAll('.slider_con')[0];
+        this.slider_page    = this.slider.querySelectorAll('.slider_page')[0];
+        this.slider_page_li = this.slider_page.querySelectorAll("li");
+        this.maxPage        = this.slider_list.querySelectorAll('li').length;
     },
     //布局
     layout:function(){
-        this.slider_list.width(this.opts.width * this.maxPage);
-        this.slider_list[0].style.webkitTransform = 'translate3D(0, 0, 0)';
+        this.slider_list.style.width = this.opts.width * this.maxPage + 'px';
+        this.slider_list.style.webkitTransform = 'translate3D(0, 0, 0)';
     },
     //页码
     page:function(){
-        this.slider_page.find("li").removeClass('cur').eq(this.nowPage).addClass('cur');
+
+        for(var i =0,len=this.slider_page_li.length; i<len; i++){
+            this.slider_page_li[i].className='';
+        }
+        this.slider_page_li[this.nowPage].className = 'cur';
     },
-    //绑定数据
-    bindEvent:function(){
-        var _this = this;
+    _touchstart:function(e){
+        var target = e.targetTouches[0];
+        this.startX = target.pageX;
 
-        this.slider_con.on("swipeLeft",function(e){
-            _this.slider_list[0].style.webkitTransitionDuration = '400ms';
-            if(_this.nowPage >= _this.maxPage - 1){
-                return false;
-            }
-            _this.nowPage++;
+        this.slider_con.style.webkitTransitionDuration = '0ms';
 
-            _this.slider_list[0].style.webkitTransform = 'translate3d(' + (-_this.nowPage * _this.opts.width) + 'px, 0px, 0px)';
+        this.moveFn = this._touchmove.bind(this);
+        this.endFn  = this._touchend.bind(this);
 
+        this.slider_con.addEventListener('touchmove', this.moveFn);
+        this.slider_con.addEventListener('touchend', this.endFn);
 
-            e.preventDefault();
-        }).on("swipeRight",function(e){
-            _this.slider_list[0].style.webkitTransitionDuration = '400ms';
-
-            if(_this.nowPage <= 0){
-                return false;
-            }
-
-            _this.nowPage--;
-
-            _this.slider_list[0].style.webkitTransform = 'translate3d(' + (-_this.nowPage * _this.opts.width) + 'px, 0px, 0px)';
-
-
-            e.preventDefault();
+        e.preventDefault();
+    },
+    _touchmove:function(e){
+        var target = e.targetTouches[0];
+        var disX = target.pageX - this.startX;
+           
+        this.opts.touchmove({
+            'x': disX,
+            'nowPage': this.nowPage
         })
+        e.preventDefault();
 
+    },
+    _touchend:function(e){
+        this.slider_con.removeEventListener("touchmove", this.moveFn, false);
+        this.slider_con.removeEventListener("touchend", this.endFn, false);
+        var target = e.changedTouches[0];
+        var endX = target.pageX -this.startX;
 
-        document.querySelector("body").addEventListener("touchmove", function(e){
-            e.preventDefault();
-        }, false)
+        
+        if( endX>0 && Math.abs(endX)>10){
+            //右
+            if(this.nowPage <= 0){
+                return false;
+            }
+            this.nowPage--;       
+        }else if(endX<0 && Math.abs(endX)>10){
+            //左
+            if(this.nowPage >= this.maxPage - 1){
+                return false;
+            }
+            this.nowPage++;           
+        }
 
+        this.slider_list.style.webkitTransitionDuration = '400ms';
+        this.slider_list.style.webkitTransform = 'translate3d(' + (-this.nowPage * this.opts.width) + 'px, 0px, 0px)';
 
-        //滚动完之后的处理
-        this.slider_list[0].addEventListener(UTIL.transitionEnd().end, function(e) {
-            this.slider_list[0].style.webkitTransitionDuration = '0ms';
-            this.page();
-        }.bind(this), false);
+        e.preventDefault();
+    },
+    _moveend:function(){
+        this.slider_list.style.webkitTransitionDuration = '0ms';
+        this.page();
+    },
+    //绑定事件
+    bindEvent:function(){
 
+        this.startFn = this._touchstart.bind(this);
+        this.slider_con.addEventListener("touchstart", this.startFn, false)
+
+        this.moveendFn = this._moveend.bind(this);
+        this.slider_list.addEventListener(UTIL.transitionEnd().end,this.moveendFn,false);
+        if(this.opts.stopPropagation){
+            document.querySelector("body").addEventListener("touchmove", function(e){
+                e.preventDefault();
+            }, false)
+        }     
+    },
+    //销毁
+    destory:function(){
+        this.slider_con.removeEventListener("touchstart", this.startFn, false);
+        this.slider_list.removeEventListener(UTIL.transitionEnd().end,this.moveendFn,false);
     }
+
 }
 

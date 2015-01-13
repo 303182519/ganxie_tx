@@ -30,7 +30,7 @@ $(function(){
             },
             //手势滑动过程
             onScroll: function(obj) {
-                console.log(obj);
+                //console.log(obj);
             },
             //手势滑动之后
             onTouchEnd: function(obj) {},

@@ -103,7 +103,7 @@ Scroller.prototype = {
     _touchstart: function(evt) {
         if (this.drag) return;
         this.drag = true;
-        target = evt.targetTouches[0];
+        var target = evt.targetTouches[0];
 
         this._x = this._x || 0;
         this._y = this._y || 0;
@@ -117,9 +117,11 @@ Scroller.prototype = {
 
         this.$el.style.webkitTransitionDuration = '0ms';
 
-        this.$el.addEventListener('touchmove', this.update.bind(this));
+        this.updateFn = this.update.bind(this);
+        this.clearEventFn = this.clearEvent.bind(this);
 
-        this.$el.addEventListener('touchend', this.clearEvent.bind(this));
+        this.$el.addEventListener('touchmove', this.updateFn);
+        this.$el.addEventListener('touchend', this.clearEventFn);
 
         evt.preventDefault();
 
@@ -129,8 +131,9 @@ Scroller.prototype = {
     clearEvent: function(evt) {
         if (!this.drag) return;
         this.drag = false;
-        this.$el.removeEventListener("touchmove", this.update, false);
-        this.$el.removeEventListener("touchend", this.clearEvent, false);
+
+        this.$el.removeEventListener("touchmove", this.updateFn, false);
+        this.$el.removeEventListener("touchend", this.clearEventFn, false);
         var target = evt.changedTouches[0];
 
         var endX = target.pageX;
