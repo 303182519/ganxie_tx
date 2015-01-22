@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+	<link rel="stylesheet" href="page.css">
+</head>
+<body>
+	<div id="page"></div>
+</body>
+<script type="text/javascript" src="page.js"></script>
+<script type="text/javascript">
+	new page({
+	  "id_dom":"page",
+	  "total":100,
+	  "per_page":3,
+	  "nowpage":1,
+	  "callback":function(now){
+	      console.log('当前页:' + now);
+	   }
+	});
+
+</script>
+</html>

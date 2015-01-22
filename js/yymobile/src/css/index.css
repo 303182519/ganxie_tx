@@ -3,6 +3,15 @@
 
 /* @import url('test.css?__inline'); */
 
+
+ body, canvas, div {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 html,body {
     width: 100%;
     font-family: "microsoft yahei",Tahoma,Verdana,Arial,Helvetica,"宋体",sans-serif;
@@ -53,6 +62,14 @@ ul,li,dl,dt,dd {
 
 .hide {
     display: none
+}
+
+a, img {
+    -webkit-touch-callout: none; /* 禁止长按链接与图片弹出菜单 */
+}
+html, body {
+    -webkit-user-select: none;   /* 禁止选中文本（如无文本选中需求，此为必选项） */
+    user-select: none;
 }
 
 /*切屏动画*/
