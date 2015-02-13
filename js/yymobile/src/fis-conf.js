@@ -1,4 +1,4 @@
-﻿//fis release -opwD -d ../build
+﻿//fis release -opwD -d ../build    123
 
 //fis.config.set('roadmap.domain', 'http://lobby4.duowan.com/build');
 fis.config.set('roadmap.domain', '.')
