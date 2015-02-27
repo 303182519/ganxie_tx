@@ -1,4 +1,4 @@
-//test3
+//maskter
 var xjl={
     byId:function(id){
         return typeof id==="string"? document.getElementById(id):id;
