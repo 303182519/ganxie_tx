@@ -66,6 +66,10 @@ fis.config.merge({
             isMod: true, //id为文件夹名
             id: '$2',
             release: '${statics}/$1'
+        },
+        {
+            reg: 'components/**/*.js',
+            isMod: true
         }, 
         {
             //modules目录下的其他脚本文件

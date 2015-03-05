@@ -10,11 +10,23 @@
     -ms-user-select: none;
     -khtml-user-select: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    /* -webkit-user-modify有个副作用，就是输入法不再能够输入多个字符
+    	另外，有些机型去除不了，如小米2
+    	对于按钮类还有个办法，不使用a或者input标签，直接用div标签 */
+    -webkit-user-modify:read-write-plaintext-only;
 }
+
+/* webkit表单元素的默认外观怎么重置 */
+.css{-webkit-appearance:none;}
+/* webkit表单输入框placeholder的颜色值能改变么 */
+input::-webkit-input-placeholder{color:#AAAAAA;}
+input:focus::-webkit-input-placeholder{color:#EEEEEE;}
+
 
 html,body {
     width: 100%;
-    font-family: "microsoft yahei",Tahoma,Verdana,Arial,Helvetica,"宋体",sans-serif;
+    /* 移动端定义字体的代码 */
+    font-family:Helvetica;
     font-size: 12px;
     color: #fff;
     height: 100%;
@@ -30,7 +42,6 @@ ul,li,dl,dt,dd {
     padding: 0;
     list-style: none
 }
-
 
 .text-center {
     text-align: center

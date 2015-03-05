@@ -12,10 +12,12 @@
 });*/
 
 
-require.async('./c',function(c){
+/*require.async('./c',function(c){
     c();
-})
+})*/
 
+var c = require('./c');
+c();
 var obj = {
 	"a":1,
 	"b":2
