@@ -2,13 +2,3 @@
 	margin: 0;
 	padding: 0;
 }
-#aa{
-	width: 470px;
-	height: 349px;
-	background: url(../img/aa.png?__sprite) no-repeat;
-}
-#bb{
-	width: 337px;
-	height: 140px;
-	background: url(../img/bb.png?__sprite) no-repeat;
-}

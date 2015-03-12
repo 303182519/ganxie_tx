@@ -1,7 +1,7 @@
 //fis release -opwD -d ../build
 
 //fis.config.set('roadmap.domain', 'http://fis.duowan.com/build');
-fis.config.set('roadmap.domain', 'http://fis.duowan.com')
+fis.config.set('roadmap.domain', 'http://test.yy.com')
 
 
 
@@ -23,11 +23,6 @@ fis.config.merge({
             sass: 'sass',
             scss: 'sass'
         },
-        //标准化预处理器插件
-        /*preprocessor:{
-            //css后缀文件会经过fis-preprocessor-image-set插件的预处理
-            css : 'image-set'
-        },*/
         //标准化处理阶段
         postprocessor : {
             js : 'jswrapper, require-async',
@@ -44,9 +39,9 @@ fis.config.merge({
             css: 'clean-css',
             png: 'png-compressor'
         },
-        postpackager: ['autoload', 'simple'],
+        postpackager: ['autoload', 'simple']
         //csssprite合并 ?__sprite
-        spriter:"csssprites"
+        //spriter:"csssprites"
     },
     roadmap: {
         ext: {
@@ -58,6 +53,13 @@ fis.config.merge({
             reg: /^\/js\/(.*)\.(js)$/i,
             //是组件化的，会被jswrapper包装
             isMod: true
+        },
+        {
+            //css文件
+            reg: /^\/css\/((.*)\.(css|less|scss|sass))$/i,
+            //使用雪碧图
+            useSprite: true,
+            release: '${statics}/$&'
         },
         {
             //一级同名组件，可以引用短路径，比如modules/jquery/juqery.js
@@ -152,13 +154,13 @@ fis.config.merge({
         spriter:{
             csssprites:{
                 //开启模板内联css处理,默认关闭
-                htmlUseSprite: true,
+                //htmlUseSprite: true,
                 //默认针对html原生<style></style>标签内的内容处理。
                 //用户可以通过配置styleTag来扩展要识别的css片段
                 //以下是默认<style></style>标签的匹配正则
-                styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig,
+                //styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig,
                 //默认是3px
-                margin:10
+                //margin:10
             }
         },
         postpackager: {
@@ -168,3 +170,5 @@ fis.config.merge({
         }
     }
 });
+
+//fis.config.set('modules.prepackager', 'css-image-set');
