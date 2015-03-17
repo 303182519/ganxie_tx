@@ -37,7 +37,8 @@ fis.config.merge({
         optimizer: {
             js: 'uglify-js',
             css: 'clean-css',
-            png: 'png-compressor'
+            png: 'png-compressor',
+            html: 'html-minifier'
         },
         postpackager: ['autoload', 'simple']
         //csssprite合并 ?__sprite
@@ -137,6 +138,9 @@ fis.config.merge({
             'png-compressor': {
                 //pngquant会将所有 png24 的图片压缩为 png8，压缩率极高，但alpha通道信息会有损失。
                 type: 'pngquant' //default is pngcrush
+            },
+            'html-minifier':{
+                collapseWhitespace:false
             }
         },
         postprocessor : {
