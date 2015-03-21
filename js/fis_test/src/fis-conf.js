@@ -71,6 +71,7 @@ fis.config.merge({
             release: '${statics}/$1'
         },
         {
+            //组件库
             reg: 'components/**/*.js',
             isMod: true
         }, 
