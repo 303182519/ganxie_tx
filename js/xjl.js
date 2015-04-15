@@ -476,9 +476,8 @@ var xjl={
         }else{
             stylesheet=document.createElement("style");
             stylesheet.appendChild(document.createTextNode(cssText));
-            document.getElementsByTagName("head")[0].appendChild(stylesheet);
         }
-        return stylesheet;
+        document.getElementsByTagName("head")[0].appendChild(stylesheet);
     },
     /*产生一个范围的随机数*/
     randomRange: function(lower, upper) {
